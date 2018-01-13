@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Line} from 'react-chartjs';
+import {Line} from 'react-chartjs-2';
 
 import {
     createFragmentContainer,
@@ -8,18 +8,20 @@ import {
 
 class Temperature extends Component {
     render() {
-        let data = this.props.temperatures.edges.map(({node}) => {
-            return {
-                x: new Date(node.timestamp),
-                y: node.value,
-            }
-        });
+        let data = this.props.temperatures.edges.map(({node}) => ({
+            t: new Date(node.timestamp),
+            y: node.value,
+        }));
+
         const chartData = {
-            labels: data.map(p => p.x),
             datasets: [{
                 label: 'Temperature',
-                pointDotRadius: 0,
-                data: data.map(p => p.y),
+                data: data,
+                type: 'line',
+                pointRadius: 0,
+                fill: false,
+                lineTension: 1,
+                borderWidth: 2,
             }]
         };
 
@@ -30,22 +32,24 @@ class Temperature extends Component {
                     type: 'time',
                     distribution: 'series',
                     ticks: {
-                        source: 'labels'
+                        autoSkip: true,
+                        maxTicksLimit: 20
                     }
                 }],
                 yAxes: [{
-                    scaleLabel: true,
-                    labelString: 'Value'
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Temperature',
+                    }
                 }]
             }
         };
 
         return (
-            <Line data={chartData} options={chartOptions} width="640" height="480"/>
+            <Line data={chartData} options={chartOptions}/>
         )
     }
 }
-
 
 export default createFragmentContainer(Temperature, graphql`
     fragment Temperature_temperatures on TemperatureConnection {
