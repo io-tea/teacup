@@ -3,12 +3,12 @@ import {
     createFragmentContainer,
     graphql
 } from 'react-relay'
-import Temperature from "./Temperature";
+import Water from './Water';
 
 class Cup extends Component {
     render() {
         return (
-            <Temperature temperatures={this.props.cup.temperatures}/>
+            <Water temperatures={this.props.cup.temperatures} level={this.props.cup.liquidLevels}/>
         )
     }
 }
@@ -17,7 +17,10 @@ class Cup extends Component {
 export default createFragmentContainer(Cup, graphql`
     fragment Cup_cup on Cup {
         temperatures {
-            ...Temperature_temperatures
+            ...Water_temperatures
+        }
+        liquidLevels {
+            ...Water_level
         }
     }
 `)

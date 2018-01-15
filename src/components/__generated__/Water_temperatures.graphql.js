@@ -8,7 +8,7 @@
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Temperature_temperatures = {|
+export type Water_temperatures = {|
   +edges: $ReadOnlyArray<?{|
     +node: ?{|
       +timestamp: ?any;
@@ -23,7 +23,7 @@ const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "Temperature_temperatures",
+  "name": "Water_temperatures",
   "selections": [
     {
       "kind": "LinkedField",

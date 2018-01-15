@@ -8,7 +8,7 @@ import Cup from './Cup'
 
 const CupsPageQuery = graphql`
     query CupsPageQuery {
-        allCups {
+        allCups(first: 1) {
             edges {
                 node {
                     ...Cup_cup

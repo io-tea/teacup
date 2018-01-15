@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6b0d6385e071a20f9980660f7038f3de
+ * @relayHash 43a499574209273a26b01c59e21e6c39
  */
 
 /* eslint-disable */
@@ -21,7 +21,7 @@ export type CupsPageQueryResponse = {|
 
 /*
 query CupsPageQuery {
-  allCups {
+  allCups(first: 1) {
     edges {
       node {
         ...Cup_cup
@@ -33,11 +33,24 @@ query CupsPageQuery {
 
 fragment Cup_cup on Cup {
   temperatures {
-    ...Temperature_temperatures
+    ...Water_temperatures
+  }
+  liquidLevels {
+    ...Water_level
   }
 }
 
-fragment Temperature_temperatures on TemperatureConnection {
+fragment Water_temperatures on TemperatureConnection {
+  edges {
+    node {
+      timestamp
+      value
+      id
+    }
+  }
+}
+
+fragment Water_level on LiquidConnection {
   edges {
     node {
       timestamp
@@ -58,7 +71,14 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LinkedField",
         "alias": null,
-        "args": null,
+        "args": [
+          {
+            "kind": "Literal",
+            "name": "first",
+            "value": 1,
+            "type": "Int"
+          }
+        ],
         "concreteType": "CupConnection",
         "name": "allCups",
         "plural": false,
@@ -91,7 +111,7 @@ const batch /*: ConcreteBatch*/ = {
             "storageKey": null
           }
         ],
-        "storageKey": null
+        "storageKey": "allCups{\"first\":1}"
       }
     ],
     "type": "Query"
@@ -109,7 +129,14 @@ const batch /*: ConcreteBatch*/ = {
       {
         "kind": "LinkedField",
         "alias": null,
-        "args": null,
+        "args": [
+          {
+            "kind": "Literal",
+            "name": "first",
+            "value": 1,
+            "type": "Int"
+          }
+        ],
         "concreteType": "CupConnection",
         "name": "allCups",
         "plural": false,
@@ -185,6 +212,60 @@ const batch /*: ConcreteBatch*/ = {
                     "storageKey": null
                   },
                   {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "LiquidConnection",
+                    "name": "liquidLevels",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "LiquidEdge",
+                        "name": "edges",
+                        "plural": true,
+                        "selections": [
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "Liquid",
+                            "name": "node",
+                            "plural": false,
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "timestamp",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "value",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "id",
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  {
                     "kind": "ScalarField",
                     "alias": null,
                     "args": null,
@@ -198,11 +279,11 @@ const batch /*: ConcreteBatch*/ = {
             "storageKey": null
           }
         ],
-        "storageKey": null
+        "storageKey": "allCups{\"first\":1}"
       }
     ]
   },
-  "text": "query CupsPageQuery {\n  allCups {\n    edges {\n      node {\n        ...Cup_cup\n        id\n      }\n    }\n  }\n}\n\nfragment Cup_cup on Cup {\n  temperatures {\n    ...Temperature_temperatures\n  }\n}\n\nfragment Temperature_temperatures on TemperatureConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n"
+  "text": "query CupsPageQuery {\n  allCups(first: 1) {\n    edges {\n      node {\n        ...Cup_cup\n        id\n      }\n    }\n  }\n}\n\nfragment Cup_cup on Cup {\n  temperatures {\n    ...Water_temperatures\n  }\n  liquidLevels {\n    ...Water_level\n  }\n}\n\nfragment Water_temperatures on TemperatureConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n\nfragment Water_level on LiquidConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n"
 };
 
 module.exports = batch;
