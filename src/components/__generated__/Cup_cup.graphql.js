@@ -11,6 +11,7 @@ import type {ConcreteFragment} from 'relay-runtime';
 export type Cup_cup = {|
   +temperatures: ?{| |};
   +liquidLevels: ?{| |};
+  +greyscaleLevels: ?{| |};
 |};
 */
 
@@ -48,6 +49,22 @@ const fragment /*: ConcreteFragment*/ = {
         {
           "kind": "FragmentSpread",
           "name": "Water_level",
+          "args": null
+        }
+      ],
+      "storageKey": null
+    },
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "args": null,
+      "concreteType": "GreyscaleConnection",
+      "name": "greyscaleLevels",
+      "plural": false,
+      "selections": [
+        {
+          "kind": "FragmentSpread",
+          "name": "Greyscale_greyscale",
           "args": null
         }
       ],

@@ -29,7 +29,7 @@ class CupsPage extends Component {
                         return <div>{error.message}</div>
                     } else if (props) {
                         return (
-                            <div>
+                            <div className="grid-fix">
                             {props.allCups.edges.map(({node}) => (
                                 <Cup key={node.__id} cup={node}/>
                             ))}

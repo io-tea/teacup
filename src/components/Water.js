@@ -40,8 +40,8 @@ class Water extends Component {
                 type: 'line',
                 pointRadius: 0,
                 pointHitRadius: 5,
-                borderColor: 'rgb(243, 163, 42)',
-                backgroundColor: 'rgba(243, 163, 42, .15)',
+                borderColor: 'rgb(255, 193, 7)',
+                backgroundColor: 'rgba(255, 193, 7, .15)',
                 lineTension: 1,
                 borderWidth: 2,
             }, {
@@ -51,8 +51,8 @@ class Water extends Component {
                 type: 'line',
                 pointRadius: 0,
                 pointHitRadius: 5,
-                borderColor: 'rgb(60, 180, 203)',
-                backgroundColor: 'rgba(60, 180, 203, .15)',
+                borderColor: 'rgb(33, 150, 243)',
+                backgroundColor: 'rgba(33, 150, 243, .15)',
                 lineTension: 1,
                 borderWidth: 2,
             }]
@@ -90,7 +90,7 @@ class Water extends Component {
         return (
             <div>
                 <Line data={chartData} options={chartOptions}/>
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{display: 'flex', justifyContent: 'center', marginTop: 20}}>
                     <Chip style={{marginRight: 10}} avatar={<Avatar>°C</Avatar>} label={temperature}/>
                     <Chip avatar={<Avatar><TimelineIcon/></Avatar>} label={waterLevel}/>
                 </div>

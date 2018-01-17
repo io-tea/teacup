@@ -3,3 +3,7 @@ body {
   padding: 0;
   background: #f8f8f8;
 }
+
+.grid-fix {
+  width: calc(100% - 8px);
+}

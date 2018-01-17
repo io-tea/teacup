@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 43a499574209273a26b01c59e21e6c39
+ * @relayHash a52b29c4940c0dd9efbca10f6ec7d121
  */
 
 /* eslint-disable */
@@ -38,6 +38,9 @@ fragment Cup_cup on Cup {
   liquidLevels {
     ...Water_level
   }
+  greyscaleLevels {
+    ...Greyscale_greyscale
+  }
 }
 
 fragment Water_temperatures on TemperatureConnection {
@@ -51,6 +54,16 @@ fragment Water_temperatures on TemperatureConnection {
 }
 
 fragment Water_level on LiquidConnection {
+  edges {
+    node {
+      timestamp
+      value
+      id
+    }
+  }
+}
+
+fragment Greyscale_greyscale on GreyscaleConnection {
   edges {
     node {
       timestamp
@@ -266,6 +279,60 @@ const batch /*: ConcreteBatch*/ = {
                     "storageKey": null
                   },
                   {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "GreyscaleConnection",
+                    "name": "greyscaleLevels",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "LinkedField",
+                        "alias": null,
+                        "args": null,
+                        "concreteType": "GreyscaleEdge",
+                        "name": "edges",
+                        "plural": true,
+                        "selections": [
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "Greyscale",
+                            "name": "node",
+                            "plural": false,
+                            "selections": [
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "timestamp",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "value",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "id",
+                                "storageKey": null
+                              }
+                            ],
+                            "storageKey": null
+                          }
+                        ],
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  },
+                  {
                     "kind": "ScalarField",
                     "alias": null,
                     "args": null,
@@ -283,7 +350,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query CupsPageQuery {\n  allCups(first: 1) {\n    edges {\n      node {\n        ...Cup_cup\n        id\n      }\n    }\n  }\n}\n\nfragment Cup_cup on Cup {\n  temperatures {\n    ...Water_temperatures\n  }\n  liquidLevels {\n    ...Water_level\n  }\n}\n\nfragment Water_temperatures on TemperatureConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n\nfragment Water_level on LiquidConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n"
+  "text": "query CupsPageQuery {\n  allCups(first: 1) {\n    edges {\n      node {\n        ...Cup_cup\n        id\n      }\n    }\n  }\n}\n\nfragment Cup_cup on Cup {\n  temperatures {\n    ...Water_temperatures\n  }\n  liquidLevels {\n    ...Water_level\n  }\n  greyscaleLevels {\n    ...Greyscale_greyscale\n  }\n}\n\nfragment Water_temperatures on TemperatureConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n\nfragment Water_level on LiquidConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n\nfragment Greyscale_greyscale on GreyscaleConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n"
 };
 
 module.exports = batch;
