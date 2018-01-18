@@ -2,8 +2,11 @@ import React, {Component} from 'react'
 import {Line} from 'react-chartjs-2';
 
 import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip'
-import OpacityIcon from 'material-ui-icons/Opacity'
+import Chip from 'material-ui/Chip';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+
+import OpacityIcon from 'material-ui-icons/Opacity';
 
 import {
     createFragmentContainer,
@@ -72,12 +75,15 @@ class Greyscale extends Component {
         };
 
         return (
-            <div>
+            <Paper className={"paper"}>
+                <Typography className={"paper-header"} type="headline" component="h1">
+                    Tea parameters
+                </Typography>
                 <Line data={chartData} options={chartOptions}/>
                 <div className={"chip-list"}>
                     <Chip avatar={<Avatar><OpacityIcon/></Avatar>} label={greyscale}/>
                 </div>
-            </div>
+            </Paper>
         )
     }
 }

@@ -11,6 +11,7 @@ import type {ConcreteFragment} from 'relay-runtime';
 export type Cup_cup = {|
   +temperatures: ?{| |};
   +liquidLevels: ?{| |};
+  +humidityLevels: ?{| |};
   +greyscaleLevels: ?{| |};
 |};
 */
@@ -25,7 +26,14 @@ const fragment /*: ConcreteFragment*/ = {
     {
       "kind": "LinkedField",
       "alias": null,
-      "args": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "last",
+          "value": 300,
+          "type": "Int"
+        }
+      ],
       "concreteType": "TemperatureConnection",
       "name": "temperatures",
       "plural": false,
@@ -36,12 +44,19 @@ const fragment /*: ConcreteFragment*/ = {
           "args": null
         }
       ],
-      "storageKey": null
+      "storageKey": "temperatures{\"last\":300}"
     },
     {
       "kind": "LinkedField",
       "alias": null,
-      "args": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "last",
+          "value": 300,
+          "type": "Int"
+        }
+      ],
       "concreteType": "LiquidConnection",
       "name": "liquidLevels",
       "plural": false,
@@ -52,12 +67,42 @@ const fragment /*: ConcreteFragment*/ = {
           "args": null
         }
       ],
-      "storageKey": null
+      "storageKey": "liquidLevels{\"last\":300}"
     },
     {
       "kind": "LinkedField",
       "alias": null,
-      "args": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "last",
+          "value": 300,
+          "type": "Int"
+        }
+      ],
+      "concreteType": "HumidityConnection",
+      "name": "humidityLevels",
+      "plural": false,
+      "selections": [
+        {
+          "kind": "FragmentSpread",
+          "name": "Water_humidity",
+          "args": null
+        }
+      ],
+      "storageKey": "humidityLevels{\"last\":300}"
+    },
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "last",
+          "value": 300,
+          "type": "Int"
+        }
+      ],
       "concreteType": "GreyscaleConnection",
       "name": "greyscaleLevels",
       "plural": false,
@@ -68,7 +113,7 @@ const fragment /*: ConcreteFragment*/ = {
           "args": null
         }
       ],
-      "storageKey": null
+      "storageKey": "greyscaleLevels{\"last\":300}"
     }
   ],
   "type": "Cup"

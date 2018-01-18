@@ -10,6 +10,20 @@ body {
     box-sizing: border-box;
 }
 
+.paper-header {
+    text-align: center;
+    margin-bottom: 10px !important;
+}
+
+.flex {
+    flex: 1;
+}
+
+.menu-button {
+    margin-left: -12px;
+    margin-right: 12px;
+}
+
 .app-bar {
     margin-bottom: 10px;
 }

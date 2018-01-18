@@ -1,9 +1,13 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {Line} from 'react-chartjs-2';
 
 import Avatar from 'material-ui/Avatar';
-import Chip from 'material-ui/Chip'
-import TimelineIcon from 'material-ui-icons/Timeline'
+import Chip from 'material-ui/Chip';
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+
+import TimelineIcon from 'material-ui-icons/Timeline';
+import GrainIcon from 'material-ui-icons/Grain';
 
 import {
     createFragmentContainer,
@@ -15,7 +19,11 @@ function transformTemperatureValue(value) {
 }
 
 function transformLevelValue(value) {
-    return Math.round(value * 100) / 100;
+    return Math.min(Math.round(value * 100) / 100, 100);
+}
+
+function transformHumidityValue(value) {
+    return Math.min(Math.round(value * 100) / 100, 100);
 }
 
 class Water extends Component {
@@ -31,6 +39,13 @@ class Water extends Component {
             y: transformLevelValue(node.value)
         }));
         let waterLevel = levelData.length > 0 ? levelData[levelData.length - 1].y : 0.00;
+
+
+        let humidityData = this.props.humidity.edges.map(({node}) => ({
+            t: new Date(node.timestamp),
+            y: transformHumidityValue(node.value)
+        }));
+        let humidityLevel = humidityData.length > 0 ? humidityData[humidityData.length - 1].y : 0.00;
 
         const chartData = {
             datasets: [{
@@ -53,6 +68,17 @@ class Water extends Component {
                 pointHitRadius: 5,
                 borderColor: 'rgb(33, 150, 243)',
                 backgroundColor: 'rgba(33, 150, 243, .15)',
+                lineTension: 1,
+                borderWidth: 2,
+            }, {
+                label: 'Humidity level',
+                data: humidityData,
+                yAxisID: 'level',
+                type: 'line',
+                pointRadius: 0,
+                pointHitRadius: 5,
+                borderColor: 'rgb(76, 175, 80)',
+                backgroundColor: 'rgba(76, 175, 80, .15)',
                 lineTension: 1,
                 borderWidth: 2,
             }]
@@ -99,13 +125,17 @@ class Water extends Component {
         };
 
         return (
-            <div>
+            <Paper className={"paper"}>
+                <Typography className={"paper-header"} type="headline" component="h1">
+                    Water parameters
+                </Typography>
                 <Line data={chartData} options={chartOptions}/>
                 <div className={"chip-list"}>
                     <Chip avatar={<Avatar>°C</Avatar>} label={temperature}/>
                     <Chip avatar={<Avatar><TimelineIcon/></Avatar>} label={waterLevel}/>
+                    <Chip avatar={<Avatar><GrainIcon/></Avatar>} label={humidityLevel}/>
                 </div>
-            </div>
+            </Paper>
         )
     }
 }
@@ -121,6 +151,15 @@ export default createFragmentContainer(Water, graphql`
     }
 
     fragment Water_level on LiquidConnection {
+        edges {
+            node {
+                timestamp
+                value
+            }
+        }
+    }
+    
+    fragment Water_humidity on HumidityConnection {
         edges {
             node {
                 timestamp

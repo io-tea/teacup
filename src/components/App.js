@@ -8,6 +8,11 @@ import Typography from 'material-ui/Typography';
 import {blue, yellow, red} from 'material-ui/colors';
 import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles';
 
+import IconButton from 'material-ui/IconButton';
+
+import MenuIcon from 'material-ui-icons/Menu';
+import AccountCircle from 'material-ui-icons/AccountCircle';
+
 const theme = createMuiTheme({
     palette: {
         primary: blue,
@@ -24,7 +29,13 @@ class App extends Component {
                 <div>
                     <AppBar position="static" className={"app-bar"}>
                         <Toolbar>
-                            <Typography type="title" color="inherit">ioTea</Typography>
+                            <IconButton color="contrast" aria-label="Menu" className={"menu-button"}>
+                                <MenuIcon/>
+                            </IconButton>
+                            <Typography type="title" color="inherit" className={"flex"}>IOTea</Typography>
+                            <IconButton color="contrast" aria-label="Menu">
+                                <AccountCircle/>
+                            </IconButton>
                         </Toolbar>
                     </AppBar>
                     <CupsPage/>

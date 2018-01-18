@@ -5,7 +5,6 @@ import {
 } from 'react-relay'
 
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
 
 import Water from './Water';
 import Greyscale from './Greyscale';
@@ -21,14 +20,13 @@ class Cup extends Component {
         return (
             <Grid container spacing={0} >
                 <Grid item lg={6} xs={12}>
-                    <Paper className={"paper"}>
-                        <Water temperatures={this.props.cup.temperatures} level={this.props.cup.liquidLevels}/>
-                    </Paper>
+                    <Water
+                        temperatures={this.props.cup.temperatures}
+                        level={this.props.cup.liquidLevels}
+                        humidity={this.props.cup.humidityLevels}/>
                 </Grid>
                 <Grid item lg={6} xs={12}>
-                    <Paper className={"paper"}>
-                        <Greyscale greyscale={this.props.cup.greyscaleLevels}/>
-                    </Paper>
+                    <Greyscale greyscale={this.props.cup.greyscaleLevels}/>
                 </Grid>
             </Grid>
         )
@@ -38,13 +36,16 @@ class Cup extends Component {
 
 export default createRefetchContainer(Cup, graphql`
     fragment Cup_cup on Cup {
-        temperatures {
+        temperatures(last: 300) {
             ...Water_temperatures
         }
-        liquidLevels {
+        liquidLevels(last: 300) {
             ...Water_level
         }
-        greyscaleLevels {
+        humidityLevels(last: 300) {
+            ...Water_humidity
+        }
+        greyscaleLevels(last: 300) {
             ...Greyscale_greyscale
         }
     }
