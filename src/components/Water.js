@@ -34,7 +34,7 @@ class Water extends Component {
 
         const chartData = {
             datasets: [{
-                label: 'Temperature',
+                label: 'Water temperature',
                 data: temperatureData,
                 yAxisID: 'temperature',
                 type: 'line',
@@ -45,7 +45,7 @@ class Water extends Component {
                 lineTension: 1,
                 borderWidth: 2,
             }, {
-                label: 'Level',
+                label: 'Water level',
                 data: levelData,
                 yAxisID: 'level',
                 type: 'line',
@@ -74,14 +74,14 @@ class Water extends Component {
                     position: 'left',
                     scaleLabel: {
                         display: true,
-                        labelString: 'Water [°C]',
+                        labelString: 'Temperature [°C]',
                     }
                 }, {
                     id: 'level',
                     position: 'right',
                     scaleLabel: {
                         display: true,
-                        labelString: 'Water level [%]',
+                        labelString: 'Level [%]',
                     }
                 }]
             },

@@ -11,7 +11,7 @@ import {
 } from 'react-relay'
 
 function transformGreyscaleValue(value) {
-    return Math.min(Math.round(value * 200), 100);
+    return Math.min(Math.round(value * 175), 100);
 }
 
 class Greyscale extends Component {
