@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a52b29c4940c0dd9efbca10f6ec7d121
+ * @relayHash 37ea10ca03c3b02ed281673d7bb4754e
  */
 
 /* eslint-disable */
@@ -21,7 +21,7 @@ export type CupsPageQueryResponse = {|
 
 /*
 query CupsPageQuery {
-  allCups(first: 1) {
+  allCups(last: 1) {
     edges {
       node {
         ...Cup_cup
@@ -87,7 +87,7 @@ const batch /*: ConcreteBatch*/ = {
         "args": [
           {
             "kind": "Literal",
-            "name": "first",
+            "name": "last",
             "value": 1,
             "type": "Int"
           }
@@ -124,7 +124,7 @@ const batch /*: ConcreteBatch*/ = {
             "storageKey": null
           }
         ],
-        "storageKey": "allCups{\"first\":1}"
+        "storageKey": "allCups{\"last\":1}"
       }
     ],
     "type": "Query"
@@ -145,7 +145,7 @@ const batch /*: ConcreteBatch*/ = {
         "args": [
           {
             "kind": "Literal",
-            "name": "first",
+            "name": "last",
             "value": 1,
             "type": "Int"
           }
@@ -346,11 +346,11 @@ const batch /*: ConcreteBatch*/ = {
             "storageKey": null
           }
         ],
-        "storageKey": "allCups{\"first\":1}"
+        "storageKey": "allCups{\"last\":1}"
       }
     ]
   },
-  "text": "query CupsPageQuery {\n  allCups(first: 1) {\n    edges {\n      node {\n        ...Cup_cup\n        id\n      }\n    }\n  }\n}\n\nfragment Cup_cup on Cup {\n  temperatures {\n    ...Water_temperatures\n  }\n  liquidLevels {\n    ...Water_level\n  }\n  greyscaleLevels {\n    ...Greyscale_greyscale\n  }\n}\n\nfragment Water_temperatures on TemperatureConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n\nfragment Water_level on LiquidConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n\nfragment Greyscale_greyscale on GreyscaleConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n"
+  "text": "query CupsPageQuery {\n  allCups(last: 1) {\n    edges {\n      node {\n        ...Cup_cup\n        id\n      }\n    }\n  }\n}\n\nfragment Cup_cup on Cup {\n  temperatures {\n    ...Water_temperatures\n  }\n  liquidLevels {\n    ...Water_level\n  }\n  greyscaleLevels {\n    ...Greyscale_greyscale\n  }\n}\n\nfragment Water_temperatures on TemperatureConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n\nfragment Water_level on LiquidConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n\nfragment Greyscale_greyscale on GreyscaleConnection {\n  edges {\n    node {\n      timestamp\n      value\n      id\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

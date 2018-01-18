@@ -9,7 +9,7 @@ import { LinearProgress } from 'material-ui/Progress';
 
 const CupsPageQuery = graphql`
     query CupsPageQuery {
-        allCups(first: 1) {
+        allCups(last: 1) {
             edges {
                 node {
                     ...Cup_cup

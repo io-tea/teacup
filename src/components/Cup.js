@@ -13,11 +13,11 @@ import Greyscale from './Greyscale';
 class Cup extends Component {
 	update() {
 		this.props.relay.refetch({}, null, () => console.log('Updated'), {});
-		setTimeout(this.update.bind(this), 5000);
+		setTimeout(this.update.bind(this), 1000);
 	}
 
     render() {
-		setTimeout(this.update.bind(this), 5000);
+		setTimeout(this.update.bind(this), 1000);
         return (
             <Grid container spacing={16} style={{ padding: 20 }}>
                 <Grid item lg={6} xs={12}>
@@ -50,7 +50,7 @@ export default createRefetchContainer(Cup, graphql`
     }
 `, graphql`
    query CupsPageQuery {
-        allCups(first: 1) {
+        allCups(last: 1) {
             edges {
                 node {
                     ...Cup_cup
