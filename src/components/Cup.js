@@ -19,14 +19,14 @@ class Cup extends Component {
     render() {
 		setTimeout(this.update.bind(this), 1000);
         return (
-            <Grid container spacing={16} style={{ padding: 20 }}>
+            <Grid container spacing={0} >
                 <Grid item lg={6} xs={12}>
-                    <Paper style={{ padding: 20 }}>
+                    <Paper className={"paper"}>
                         <Water temperatures={this.props.cup.temperatures} level={this.props.cup.liquidLevels}/>
                     </Paper>
                 </Grid>
                 <Grid item lg={6} xs={12}>
-                    <Paper style={{ padding: 20 }}>
+                    <Paper className={"paper"}>
                         <Greyscale greyscale={this.props.cup.greyscaleLevels}/>
                     </Paper>
                 </Grid>

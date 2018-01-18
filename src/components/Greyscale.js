@@ -10,21 +10,22 @@ import {
     graphql
 } from 'react-relay'
 
+function transformGreyscaleValue(value) {
+    return Math.min(Math.round(value * 200) / 100, 100);
+}
+
 class Greyscale extends Component {
     render() {
         let greyscaleData = this.props.greyscale.edges.map(({node}) => ({
             t: new Date(node.timestamp),
-            y: node.value,
+            y: transformGreyscaleValue(node.value),
         }));
 
-        let greyscale = 0;
-        if (greyscaleData.length > 0) {
-            greyscale = greyscaleData[greyscaleData.length - 1].y;
-        }
+        let greyscale = greyscaleData.length > 0 ? greyscaleData[greyscaleData.length - 1].y : 0;
 
         const chartData = {
             datasets: [{
-                label: 'Tea saturation',
+                label: 'Tea strength',
                 data: greyscaleData,
                 yAxisID: 'greyscale',
                 type: 'line',
@@ -53,7 +54,7 @@ class Greyscale extends Component {
                     position: 'left',
                     scaleLabel: {
                         display: true,
-                        labelString: 'Saturation',
+                        labelString: 'Tea strength [%]',
                     }
                 }]
             }

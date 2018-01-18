@@ -22,7 +22,7 @@ class App extends Component {
         return (
             <MuiThemeProvider theme={theme}>
                 <div>
-                    <AppBar position="static" style={{ marginBottom: 20 }}>
+                    <AppBar position="static" className={"app-bar"}>
                         <Toolbar>
                             <Typography type="title" color="inherit">ioTea</Typography>
                         </Toolbar>

@@ -5,7 +5,7 @@ import {
 } from 'react-relay'
 import environment from '../Environment'
 import Cup from './Cup'
-import { LinearProgress } from 'material-ui/Progress';
+import {LinearProgress} from 'material-ui/Progress';
 
 const CupsPageQuery = graphql`
     query CupsPageQuery {
@@ -35,7 +35,7 @@ class CupsPage extends Component {
                             <Cup key={node.__id} cup={node}/>
                         )
                     } else {
-                        return <LinearProgress mode="query" />
+                        return <LinearProgress mode="query"/>
                     }
                 }}
             />

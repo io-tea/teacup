@@ -10,31 +10,31 @@ import {
     graphql
 } from 'react-relay'
 
+function transformTemperatureValue(value) {
+    return Math.round(value * 100) / 100;
+}
+
+function transformLevelValue(value) {
+    return Math.round(value * 100) / 100;
+}
+
 class Water extends Component {
     render() {
         let temperatureData = this.props.temperatures.edges.map(({node}) => ({
             t: new Date(node.timestamp),
-            y: node.value,
+            y: transformTemperatureValue(node.value),
         }));
-
-        let temperature = 0;
-        if (temperatureData.length > 0) {
-            temperature = temperatureData[temperatureData.length - 1].y;
-        }
+        let temperature = temperatureData.length > 0 ? temperatureData[temperatureData.length - 1].y : 0.00;
 
         let levelData = this.props.level.edges.map(({node}) => ({
             t: new Date(node.timestamp),
-            y: node.value
+            y: transformLevelValue(node.value)
         }));
-
-        let waterLevel = 0;
-        if (levelData.length > 0) {
-            waterLevel = levelData[levelData.length - 1].y;
-        }
+        let waterLevel = levelData.length > 0 ? levelData[levelData.length - 1].y : 0.00;
 
         const chartData = {
             datasets: [{
-                label: 'Water temperature',
+                label: 'Temperature',
                 data: temperatureData,
                 yAxisID: 'temperature',
                 type: 'line',
@@ -45,7 +45,7 @@ class Water extends Component {
                 lineTension: 1,
                 borderWidth: 2,
             }, {
-                label: 'Water level',
+                label: 'Level',
                 data: levelData,
                 yAxisID: 'level',
                 type: 'line',
@@ -81,7 +81,7 @@ class Water extends Component {
                     position: 'right',
                     scaleLabel: {
                         display: true,
-                        labelString: 'Water level [cm]',
+                        labelString: 'Water level [%]',
                     }
                 }]
             }
@@ -90,8 +90,8 @@ class Water extends Component {
         return (
             <div>
                 <Line data={chartData} options={chartOptions}/>
-                <div style={{display: 'flex', justifyContent: 'center', marginTop: 20}}>
-                    <Chip style={{marginRight: 10}} avatar={<Avatar>°C</Avatar>} label={temperature}/>
+                <div className={"chip-list"}>
+                    <Chip avatar={<Avatar>°C</Avatar>} label={temperature}/>
                     <Chip avatar={<Avatar><TimelineIcon/></Avatar>} label={waterLevel}/>
                 </div>
             </div>
