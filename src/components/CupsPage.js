@@ -5,6 +5,7 @@ import {
 } from 'react-relay'
 import environment from '../Environment'
 import Cup from './Cup'
+import { LinearProgress } from 'material-ui/Progress';
 
 const CupsPageQuery = graphql`
     query CupsPageQuery {
@@ -24,19 +25,18 @@ class CupsPage extends Component {
             <QueryRenderer
                 environment={environment}
                 query={CupsPageQuery}
+                variables={this.variables}
                 render={({error, props}) => {
                     if (error) {
                         return <div>{error.message}</div>
-                    } else if (props) {
+                    } else if (props && props.allCups.edges.length > 0) {
+                        let node = props.allCups.edges[0].node;
                         return (
-                            <div className="grid-fix">
-                            {props.allCups.edges.map(({node}) => (
-                                <Cup key={node.__id} cup={node}/>
-                            ))}
-                            </div>
+                            <Cup key={node.__id} cup={node}/>
                         )
+                    } else {
+                        return <LinearProgress mode="query" />
                     }
-                    return <div>Loading</div>
                 }}
             />
         )

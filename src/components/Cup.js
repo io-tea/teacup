@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-    createFragmentContainer,
+    createRefetchContainer,
     graphql
 } from 'react-relay'
 
@@ -11,7 +11,13 @@ import Water from './Water';
 import Greyscale from './Greyscale';
 
 class Cup extends Component {
+	update() {
+		this.props.relay.refetch({}, null, () => console.log('Updated'), {});
+		setTimeout(this.update.bind(this), 5000);
+	}
+
     render() {
+		setTimeout(this.update.bind(this), 5000);
         return (
             <Grid container spacing={16} style={{ padding: 20 }}>
                 <Grid item lg={6} xs={12}>
@@ -30,7 +36,7 @@ class Cup extends Component {
 }
 
 
-export default createFragmentContainer(Cup, graphql`
+export default createRefetchContainer(Cup, graphql`
     fragment Cup_cup on Cup {
         temperatures {
             ...Water_temperatures
@@ -42,4 +48,14 @@ export default createFragmentContainer(Cup, graphql`
             ...Greyscale_greyscale
         }
     }
-`)
+`, graphql`
+   query CupsPageQuery {
+        allCups(first: 1) {
+            edges {
+                node {
+                    ...Cup_cup
+                }
+            }
+        }
+    }
+`);
