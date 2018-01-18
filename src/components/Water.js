@@ -84,6 +84,17 @@ class Water extends Component {
                         labelString: 'Water level [%]',
                     }
                 }]
+            },
+            tooltips: {
+                callbacks: {
+                    title: function(tooltipItem) {
+                        const datetime = tooltipItem[0].xLabel;
+                        const hours = ("0" + datetime.getHours()).substr(-2);
+                        const minutes = ("0" + datetime.getMinutes()).substr(-2);
+                        const seconds = ("0" + datetime.getSeconds()).substr(-2);
+                        return `${hours}:${minutes}:${seconds}`;
+                    }
+                }
             }
         };
 

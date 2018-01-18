@@ -11,7 +11,7 @@ import {
 } from 'react-relay'
 
 function transformGreyscaleValue(value) {
-    return Math.min(Math.round(value * 200) / 100, 100);
+    return Math.min(Math.round(value * 200), 100);
 }
 
 class Greyscale extends Component {
@@ -57,14 +57,25 @@ class Greyscale extends Component {
                         labelString: 'Tea strength [%]',
                     }
                 }]
+            },
+            tooltips: {
+                callbacks: {
+                    title: function(tooltipItem) {
+                        const datetime = tooltipItem[0].xLabel;
+                        const hours = ("0" + datetime.getHours()).substr(-2);
+                        const minutes = ("0" + datetime.getMinutes()).substr(-2);
+                        const seconds = ("0" + datetime.getSeconds()).substr(-2);
+                        return `${hours}:${minutes}:${seconds}`;
+                    }
+                }
             }
         };
 
         return (
             <div>
                 <Line data={chartData} options={chartOptions}/>
-                <div style={{display: 'flex', justifyContent: 'center', marginTop: 20}}>
-                    <Chip style={{marginRight: 10}} avatar={<Avatar><OpacityIcon/></Avatar>} label={greyscale}/>
+                <div className={"chip-list"}>
+                    <Chip avatar={<Avatar><OpacityIcon/></Avatar>} label={greyscale}/>
                 </div>
             </div>
         )
