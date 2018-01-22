@@ -19,7 +19,7 @@ function transformTemperatureValue(value) {
 }
 
 function transformLevelValue(value) {
-    return Math.min(Math.round(value * 100) / 100, 100);
+    return Math.min(Math.round(value * 10000) / 100, 100);
 }
 
 function transformHumidityValue(value) {
